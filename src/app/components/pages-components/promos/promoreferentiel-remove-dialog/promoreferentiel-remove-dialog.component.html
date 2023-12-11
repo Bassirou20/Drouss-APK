@@ -1,0 +1,31 @@
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Désactiver Référentiel</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form (ngSubmit)="removeReferentiels()" >
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-6">
+                <div class="modal-body">
+                    <div *ngIf="referentielsLinked && referentielsLinked.length > 0; else noReferentielsToRemove">
+                      <div *ngFor="let referentielLinked of referentielsLinked">
+                        <mat-checkbox type="checkbox" [checked]="isSelected(referentielLinked)" (change)="toggleSelection(referentielLinked)">
+                          {{ referentielLinked.libelle }}
+                          </mat-checkbox>
+                      </div>
+                     
+                    </div>
+                    <ng-template #noReferentielsToRemove>
+                      <p>Il n'y a pas de référentiel à désactiver.</p>
+                    </ng-template>
+                </div>
+            </div>
+            
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+            <button type="submit" class=" remove-btn"><i class="ri-subtract-fill"></i> Désactiver Référentiel</button>
+        </div>
+    </form>
+</div>

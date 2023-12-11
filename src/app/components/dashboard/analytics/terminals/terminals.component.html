@@ -1,0 +1,46 @@
+<mat-card class="mb-25 terminals-box tagus-card" [class.component-dark-theme]="themeService.isDark()">
+    <mat-card-header class="border-bottom">
+        <h5 class="mb-0">Referentiels</h5>
+        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="monthMenu">
+            <i class="ri-more-fill"></i>
+        </button>
+        <mat-menu #monthMenu="matMenu" class="dotMenu monthMenu" xPosition="before">
+            <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                <i class="ri-add-circle-line"></i> Add
+            </button>
+            <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                <i class="ri-delete-bin-6-line"></i> Delete
+            </button>
+            <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                <i class="ri-restart-line"></i> Refresh
+            </button>
+        </mat-menu>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="terminals-list position-relative">
+            <div class="terminal-box position-relative rounded-circle text-center">
+                <div class="text" *ngIf="nombAppRef">
+                    <h4>{{nombAppRef.dev_web!}}</h4>
+                    <span>Dev Web</span>
+                </div>
+            </div>
+            <div class="terminal-box position-relative rounded-circle text-center">
+                <div class="text" *ngIf="nombAppRef">
+                    <h4>{{nombAppRef.ref_dig}}</h4>
+                    <span>Ref Dig</span>
+                </div>
+            </div>
+            <div class="terminal-box position-relative rounded-circle text-center">
+                <div class="text" *ngIf="nombAppRef">
+                    <h4>{{nombAppRef.dev_data}}</h4>
+                    <span>Data</span>
+                </div>
+            </div>
+        </div>
+        <ul class="list text-center ps-0 mb-0">
+            <li class="position-relative gray-color">Dev Web</li>
+            <li class="position-relative gray-color">Data</li>
+            <li class="position-relative gray-color">Reference Digital</li>
+        </ul>
+    </mat-card-content>
+</mat-card>

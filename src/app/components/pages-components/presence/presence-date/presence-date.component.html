@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <!-- <div class="row align-items-center">
+    <div>
+      <div class="date-form-container d-flex align-items-center justify-content-end">
+          <h1 class="m-0">Date:</h1>
+        <form (ngSubmit)="onSubmit(date.value)" #dateForm="ngForm" class="d-flex align-items-center ">
+            <div class="tagus-form-group">
+                <label class="d-block mb-12 fw-semibold gray-color">Date Naissance</label>
+                <mat-form-field appearance="fill" class="date-input">
+                    <mat-label>MM/DD/YYYY</mat-label>
+                    <input matInput [matDatepicker]="picker" name="date_naissance"  #date>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                </div>
+          <button type="submit" mat-raised-button color="primary" class="fw-bold">Valider</button>
+
+        </form>
+      </div>
+    </div>
+  </div> -->
+  <mat-card class="mb-25 tagus-card" >
+
+    <mat-card-header>
+        <h5 class="mb-0 list-title" style="font-size: 30px;"><span style="text-decoration: underline;">Liste de présence :</span> {{ MyDate | date:'dd-MM-yyyy'}} <span class="main-color"></span></h5>
+        <div class="d-flex align-items-center">
+
+            <form (ngSubmit)="onSubmit(date.value)" #dateForm="ngForm" class="d-flex align-items-center ">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold">Choisir Date</label>
+                    <mat-form-field appearance="fill" class="date-input" style="background-color: white;">
+                        <mat-label>MM/DD/YYYY</mat-label>
+                        <input matInput [matDatepicker]="picker" name="date_naissance"  #date>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    </div>
+              <button type="submit" mat-raised-button color="" class="default-btn tagus small">Valider</button>
+
+            </form>
+
+        </div>
+    </mat-card-header>
+</mat-card>
+
+  <app-presence-list [date]="selectedDate"></app-presence-list>
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+    </div>
+  </div>
+</div>

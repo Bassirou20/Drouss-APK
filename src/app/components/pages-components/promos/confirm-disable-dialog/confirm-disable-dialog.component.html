@@ -1,0 +1,44 @@
+<div *ngIf="apprenant" >
+    <div class="create-dialog-box scrollable-dialog">
+      <div class="title d-flex align-items-center justify-content-space-between">
+          <h4 class="mb-0">Désactiver</h4>
+          <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+      </div>
+      <form  (ngSubmit)="desactiver()" [formGroup]="disableForm" >
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Êtes vous sûres de vouloir désactiver <strong>{{apprenant.prenom}} {{apprenant.nom}}</strong> ?
+                         Si oui entrez le motif:</label>
+                   
+                    
+                </div>
+            </div>
+            
+            
+                <div class="tagus-form-group">
+                   
+                    <mat-form-field appearance="fill">
+                        <i class="ri-toggle-line"></i>
+                        <mat-label>Entrer le motif</mat-label>
+                        <input matInput
+                        formControlName="motif"
+                        name="motif"
+                        [ngClass]="{'is-invalid': submitted && form['motif'].errors}"
+                        >
+                    </mat-form-field>
+                    <div *ngIf="submitted && form['motif'].errors" class="invalid-feedback" style="color: red;">
+                        <span *ngIf="form['motif'].errors['required']">motif est requis.</span>
+                    </div>
+                </div>
+            
+            
+              
+          </div>
+          <div class="text-end">
+              <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+              <button type="submit" class="remove-btn"><i class="ri-subtract-fill"></i> Désactiver</button>
+          </div>
+      </form>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+    <mat-card
+        class="mb-25 tagus-card gender-box"
+        [class.component-dark-theme]="themeService.isDark()"
+        [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+        *ngFor="let pr of promo"
+    >
+        <mat-card-header class="border-bottom" >
+            <h5 class="mb-0">Insertion {{pr.libelle}} test</h5>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="chart">
+                <apx-chart
+                    [series]="chartOptions.series!"
+                    [chart]="chartOptions.chart!"
+                    [plotOptions]="chartOptions.plotOptions!"
+                    [labels]="chartOptions.labels!"
+                    [colors]="chartOptions.colors!"
+                ></apx-chart>
+            </div>
+            <ul class="list mb-0">
+                <li class="d-flex align-items-center justify-content-space-between position-relative">
+                    <span class="gray-color">Homme</span>
+                    <span class="gray-color fw-semibold">{{ pr.hommes}}</span>
+                    <span class="gray-color"><i class="flaticon-bar-chart-4"></i> {{(pr.hommes *100)/(pr.hommes + pr.femmes)}}%</span>
+                </li>
+                <li class="d-flex align-items-center justify-content-space-between position-relative">
+                    <span class="gray-color">Femme</span>
+                    <span class="gray-color fw-semibold">{{ pr.femmes }}</span>
+                    <span class="gray-color"><i class="flaticon-bar-chart-4"></i> {{(pr.femmes *100)/(pr.hommes + pr.femmes)}}%</span>
+                </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>

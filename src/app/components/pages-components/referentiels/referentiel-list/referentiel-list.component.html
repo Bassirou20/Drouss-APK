@@ -1,0 +1,65 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Référentiels</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+
+        <li class="breadcrumb-item gray-color">Référentiels</li>
+        <li class="breadcrumb-item fw-semibold"> Liste</li>
+    </ol>
+</div>
+
+<div class="row" [class.component-rtl-enabled]="themeService.isRTLEnabled()">
+    <div class="col-9">
+        <div class="row">
+            <app-referentiel-card *ngFor="let ref of referentiels" [referentiel]="ref" class="col-sm-3 col-md-3 col-lg-1 col-xl-2 col-xxl-3" (referentielSelected)="onReferentielSelected($event)"></app-referentiel-card>
+
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div *ngIf="userRole === true">
+            <mat-card class="mb-25 tagus-card">
+                <mat-card-content>
+                    
+                    <form [formGroup]="referentielForm" (ngSubmit)="saveReferentiel()">
+                        <div class="title d-flex align-items-center justify-content-space-between">
+                            <h4 class="mb-0"> {{ isReferentielSelected ? 'Modifier Referentiel' : 'Nouveau Referentiel' }}</h4>
+                            <button class="close-btn bg-transparent p-0 border-none" (click)="close()"></button>
+                        </div>
+                        <div class="row" #divForm>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="tagus-form-group">
+                                    <label class="d-block mb-12 fw-semibold gray-color">Libelle</label>
+                                    <mat-form-field appearance="fill">
+                                        <i class="ri-user-3-line"></i>
+                                        <mat-label>Entrer le libelle</mat-label>
+                                        <input matInput formControlName="libelle">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="tagus-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Description</label>
+                                <mat-form-field appearance="fill">
+                                    <i class="ri-user-3-line"></i>
+                                    <mat-label>Entrer le Description</mat-label>
+                                    <textarea matInput formControlName="description" matTextareaAutosize></textarea>
+                                </mat-form-field>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="text-center">
+                            <button mat-flat-button class="tagus fw-semibold d-flex align-items-center"> 
+                                {{ isReferentielSelected ? 'Modifier' : 'Enregistrer' }}
+                            </button>
+                        </div>
+                    </form>
+            
+                </mat-card-content>
+            </mat-card> 
+        </div>
+    </div>
+    
+
+
+</div>

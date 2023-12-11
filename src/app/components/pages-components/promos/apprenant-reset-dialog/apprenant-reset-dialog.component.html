@@ -1,0 +1,28 @@
+
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Réinitialiser</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form  (ngSubmit)="reset()" >
+        <div class="row">
+            
+          
+          
+            <strong >
+                Êtes vous sûres de vouloir Réinitialiser le mot de passe ? 
+            </strong>
+                <div >
+                    Le mot de passe sera remis à  <strong >Passer</strong>
+                </div>
+           
+          
+          
+            
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+            <button type="submit" class="remove-btn"><i class="ri-subtract-fill"></i> Réinitialiser</button>
+        </div>
+    </form>
+</div>

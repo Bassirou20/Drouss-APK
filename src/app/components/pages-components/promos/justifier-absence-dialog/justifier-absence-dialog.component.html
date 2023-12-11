@@ -1,0 +1,38 @@
+<div *ngIf="absence ">
+    <div class="create-dialog-box scrollable-dialog">
+        <div class="title d-flex align-items-center justify-content-space-between">
+            <h4 class="mb-0">Justification de l'absence de {{absence.apprenant.prenom}} {{absence.apprenant.nom}}</h4>
+            <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+        </div>
+        <form (ngSubmit)="justificationAbsence(absence.id)" [formGroup]="justifyForm">
+            <div class="row">
+                
+                <div class="tagus-form-group">
+                   
+                    <mat-form-field appearance="fill">
+                        
+                        <mat-label>Entrer le motif</mat-label>
+                        <input matInput
+                        formControlName="motif"
+                        name="motif"
+                        [ngClass]="{'is-invalid': submitted && form['motif'].errors}"
+                        >
+                    </mat-form-field>
+                    <div *ngIf="submitted && form['motif'].errors" class="invalid-feedback" style="color: red;">
+                        <span *ngIf="form['motif'].errors['required']">motif est requis.</span>
+                    </div>
+                </div>
+    
+                   
+    
+    
+                   
+               
+            </div>
+            <div class="text-end">
+                <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+                <button type="submit"><i class="ri-edit-fill"></i> Justifier Absence</button>
+            </div>
+        </form>
+    </div>
+    </div>

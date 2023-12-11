@@ -1,0 +1,226 @@
+<div *ngIf="apprenant ">
+    <div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+        <h5 class="mb-0">Apprenant</h5>
+        <ol class="breadcrumb mb-0 ps-0">
+            <li class="breadcrumb-item">
+                <a routerLink="/">
+                    <i class="ri-home-8-line"></i> Dashboard
+                </a>
+            </li>
+            <li class="breadcrumb-item fw-semibold">Détails Apprenant</li>
+        </ol>
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
+        <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="33%" fxFlex.md="100%" class="col">
+
+            <app-personal-info [person]="apprenant" [promo]="promotion" [ref]="referentiel"></app-personal-info>
+
+        </div>
+
+        <div *ngIf="isSuperAdmin">
+
+            <mat-card class="mb-25 tagus-card">
+                <mat-card-header>
+                    <h5 class="mb-0">Modifier les Infos.</h5>
+                    <button mat-flat-button class="tagus fw-semibold d-flex align-items-center text-end ms-20" (click)="addInputDiv(divForm)">+</button>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <form [formGroup]="apprenantForm" (ngSubmit)="modifyApprenant(apprenant)">
+                        <div class="row" #divForm>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="tagus-form-group">
+                                    <label class="d-block mb-12 fw-semibold gray-color"> Nom</label>
+                                    <mat-form-field appearance="fill">
+                                        <i class="ri-user-3-line"></i>
+                                        <mat-label>Entrer le nom</mat-label>
+                                        <input matInput formControlName="nom" name="nom" [value]="apprenant.nom" [ngClass]="{'is-invalid': submitted && form['nom'].errors}">
+                                    </mat-form-field>
+                                    <div *ngIf="submitted && form['nom'].errors" style="color: red;">
+                                        <div *ngIf="form['nom'].errors['required']">Le nom est obligatoire.</div>
+                                        <div *ngIf="form['nom'].errors['maxlength']">Le nom doit contenir au maximum 255 caractères.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="tagus-form-group">
+                                    <label class="d-block mb-12 fw-semibold gray-color">Prénom</label>
+                                    <mat-form-field appearance="fill">
+                                        <i class="ri-user-3-line"></i>
+                                        <mat-label>Entrer le Prénom</mat-label>
+                                        <input matInput formControlName="prenom" name="prenom" [ngClass]="{'is-invalid': submitted && form['prenom'].errors}" [value]="apprenant.prenom">
+                                    </mat-form-field>
+                                    <div *ngIf="submitted && form['prenom'].errors" style="color: red;">
+                                        <span *ngIf="form['prenom'].errors['required']">Le prenom est obligatoire.</span>
+                                        <span *ngIf="form['prenom'].errors['maxlength']">Le prenom doit contenir au maximum 255 caractères.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="tagus-form-group">
+                                    <label class="d-block mb-12 fw-semibold gray-color">Email <span>*</span></label>
+                                    <mat-form-field appearance="fill">
+                                        <i class="ri-mail-line"></i>
+                                        <mat-label>Entrer email </mat-label>
+                                        <input matInput formControlName="email" name="email" [ngClass]="{'is-invalid': submitted && form['email'].errors}" [value]="apprenant.email">
+                                    </mat-form-field>
+                                    <div *ngIf="submitted && form['email'].errors" style="color: red;">
+                                        <span *ngIf="form['email'].errors['required']">L' email est obligatoire.</span>
+                                        <span *ngIf="form['email'].errors['maxlength']">L' email doit contenir au maximum 255 caractères.</span>
+                                        <span *ngIf="form['email'].errors['email']">L' email doit etre une addresse valide ex(@gmail).</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="tagus-form-group">
+                                    <label class="d-block mb-12 fw-semibold gray-color">Téléphone</label>
+                                    <mat-form-field appearance="fill">
+                                        <i class="ri-phone-line"></i>
+                                        <mat-label>Entrer le telephone</mat-label>
+                                        <input matInput formControlName="telephone" name="telephone" [ngClass]="{'is-invalid': submitted && form['telephone'].errors}" [value]="apprenant.telephone">
+                                    </mat-form-field>
+                                    <div *ngIf="submitted && form['telephone'].errors" style="color: red;">
+                                        <span *ngIf="form['telephone'].errors['maxlength']">Le numéro de téléphone doit contenir au maximum 255 caractères.</span>
+                                        <span *ngIf="form['telephone'].errors['required']">Le numéro telephone est obligatoire.</span>
+                                        <span *ngIf="form['telephone'].errors['pattern']">Le numéro de téléphone doit contenir uniquement des chiffres, des espaces et les caractères +, -, (, ).</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="tagus-form-group">
+                                    <label class="d-block mb-12 fw-semibold gray-color">Date Naiss.</label>
+                                    <mat-form-field appearance="fill">
+                                        <i class="ri-phone-line"></i>
+                                        <mat-label>Entrer la date de naissance</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="date_naissance" name="date_naissance" [ngClass]="{'is-invalid': submitted && form['date_naissance'].errors}" [value]="apprenant.date_naissance">
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                    <div *ngIf="submitted && form['date_naissance'].errors" class="invalid-feedback" style="color: red;">
+                                        <span *ngIf="form['date_naissance'].errors['required']">Date_naissance est requis.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="tagus-form-group">
+                                    <label class="d-block mb-12 fw-semibold gray-color">Lieu Naiss.</label>
+                                    <mat-form-field appearance="fill">
+                                        <i class="ri-phone-line"></i>
+                                        <mat-label>Entrer le lieu de naissance</mat-label>
+                                        <input matInput formControlName="lieu_naissance" name="lieu_naissance" [value]="apprenant.lieu_naissance">
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="tagus-form-group">
+                                    <label class="d-block mb-12 fw-semibold gray-color">CNI</label>
+                                    <mat-form-field appearance="fill">
+                                        <i class="ri-phone-line"></i>
+                                        <mat-label>Entrer le CNI</mat-label>
+                                        <input matInput formControlName="cni" name="cni" [ngClass]="{'is-invalid': submitted && form['cni'].errors}" [value]="apprenant.cni">
+                                    </mat-form-field>
+                                    <div *ngIf="submitted && form['cni'].errors" class="invalid-feedback" style="color: red;">
+                                        <span *ngIf="form['cni'].errors['required']">Cni est requis.</span>
+                                        <span *ngIf="form['cni'].errors['pattern']">Le Cni doit contenir uniquement des chiffres.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-4 col-sm-4">
+                                <div class="tagus-form-group without-icon">
+                                    <label class="d-block mb-12 fw-semibold gray-color">Sexe</label>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Choisir le sexe</mat-label>
+                                        <mat-select formControlName="genre" name="genre" [value]="apprenant.genre">
+                                            <mat-option value="Masculin">Masculin</mat-option>
+                                            <mat-option value="Feminin">Feminin</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="mt-5" style="display: flex; align-items: center;">
+
+                            <button type="button" mat-flat-button class="tagus" class="remove-btn" (click)="openConfirmationDialog('300ms', '100ms',apprenant.id)">Reset password</button>
+
+                            <button type="submit" mat-flat-button class="tagus" style="margin-left: auto;">Modifier apprenant</button>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+
+
+            <mat-card class="mb-25 tagus-card" [class.component-dark-theme]="themeService.isDark()">
+
+                <mat-card-header>
+
+
+                    <h5 class="mb-0">Absence(s) de l'apprenant <span class="main-color">  ({{dataSource.data.length}})</span></h5>
+
+
+                </mat-card-header>
+                <div *ngIf="absence && (!absence || absence.length === 0)">
+                    <p>L'apprenant n'a pas d'absences.</p>
+                </div>
+                <mat-card-content *ngIf="absence &&  absence.length != 0">
+
+                    <div class="mat-elevation-z8 tagus-mat-table">
+                        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+
+                            <ng-container matColumnDef="select">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                                    </mat-checkbox>
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                                    </mat-checkbox>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="date_absence">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                                <td mat-cell *matCellDef="let element">{{element.date_absence}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="justifier">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Justifier</th>
+                                <td mat-cell *matCellDef="let element" [ngStyle]="{'color': element.justifier ? 'green' : 'red'}">
+                                    <ng-container *ngIf="element.justifier; else notJustified">Justifier</ng-container>
+                                    <ng-template #notJustified>Non justifié</ng-template>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="motif">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Motif</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <ng-container *ngIf="element.motif; else noMotif">{{ element.motif }}</ng-container>
+                                    <ng-template #noMotif>Pas de motif d'absence</ng-template>
+                                </td>
+                            </ng-container>
+
+
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[2, 5, 10]" showFirstLastButtons></mat-paginator>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+</div>

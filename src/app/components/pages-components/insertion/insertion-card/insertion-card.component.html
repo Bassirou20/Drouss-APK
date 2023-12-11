@@ -1,0 +1,28 @@
+<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+    <mat-card class="mb-25 text-center tagus-card">
+        <mat-card-content>
+            <img [src]="imgEntreprise" class="rounded-circle mb-15" width="250" alt="user">
+            <h5 class="mb-5 fw-semibold">{{insertion.responsable|titlecase}}</h5>
+            <span class="d-block muted-color">@{{insertion.fonction|titlecase}}</span>
+            <div class="btn-box">
+                <a mat-flat-button class="tagus me-2" [routerLink]="['detail',insertion.id]">Détails</a>
+                <button mat-flat-button class="gray">Modifier</button>
+            </div>
+            <ul class="list d-flex align-items-center justify-content-space-between text-center mb-0">
+                <li class="muted-color fw-medium down">
+                    <span class="d-block">Nombre</span>
+                    <span class="gray-color d-inline-block position-relative fw-semibold">{{insertion.nbre}}</span>
+                </li>
+                <li class="muted-color fw-medium">
+                    <span class="d-block">Followers</span>
+                    <span class="gray-color d-inline-block position-relative fw-semibold">{{insertion.fonction|titlecase}}</span>
+                </li>
+                <li class="muted-color fw-medium down">
+                    <span class="d-block">Adresse</span>
+                    <span class="gray-color d-inline-block position-relative fw-semibold">{{insertion.adresse|titlecase}}</span>
+                </li>
+            </ul>
+
+        </mat-card-content>
+    </mat-card>
+</div>

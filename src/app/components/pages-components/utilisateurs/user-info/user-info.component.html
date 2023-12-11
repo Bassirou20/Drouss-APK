@@ -1,0 +1,28 @@
+<mat-card class="mb-25 text-center tagus-card" *ngIf="user && showUserInfo">
+  <mat-card-header>
+    <div class="close-button" (click)="closeUserInfo()">
+      <i class="fas fa-times"></i>fermer
+    </div>
+  </mat-card-header>
+    <mat-card-content>
+      <img src="assets/img/user/user13.jpg" class="rounded-circle mb-15" width="150" alt="user">
+      <h5 class="mb-5 fw-semibold">{{user.name}} {{user.prenom}}</h5>
+      <span class="d-block muted-color">{{user.email}}</span>
+      <div class="mt-4">
+        <p><strong>Adresse:</strong> {{user.adresse}}</p>
+        <p><strong>Téléphone:</strong> {{user.telephone}}</p>
+        <p><strong>Rôle:</strong> {{user.role_id.libelle}}</p>
+      </div>
+      <button mat-flat-button [style.background-color]="user.isActive ? 'red' : 'green'" (click)="desactiver()">
+        {{ user.isActive ? 'Désactiver' : 'Activer' }}
+      </button>
+      <button mat-flat-button color="primary" style="margin-left: 10px;" (click)="onModifierClick()">
+        Modifier
+      </button>
+      <button mat-flat-button (click)="resetPassword()">
+        Reset password
+      </button>
+      <app-user-form *ngIf="showForm" [user]="user"></app-user-form>
+    </mat-card-content>
+  </mat-card>
+  

@@ -1,0 +1,10 @@
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <button [disabled]=AjoutDisabled mat-flat-button class="default-btn tagus" (click)="openDialog('300ms', '100ms')" >
+            <i class="ri-add-fill"></i> Ajouter
+        </button>
+    </mat-card-header>
+    <mat-card-content>
+        <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,122 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Promotions</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+
+        <li class="breadcrumb-item fw-semibold">Promos</li>
+        <li class="breadcrumb-item fw-semibold"> Création</li>
+    </ol>
+</div>
+<mat-card class="mb-25 tagus-card">
+    <mat-card-content>
+        <mat-stepper class="tagus-wizard" #stepper2 orientation="vertical">
+            <mat-step>
+                <ng-template matStepLabel>Promotion</ng-template>
+                <form (ngSubmit)="savePromo()" [formGroup]="promoForm">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="tagus-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Libelle</label>
+                                <mat-form-field appearance="fill">
+                                    <i class="ri-graduation-cap-fill"></i>
+                                    <mat-label>
+                                        Entrer le libelle
+                                    </mat-label>
+                                    <input matInput
+                                    formControlName="libelle"
+                                    name="libelle"
+                                    [ngClass]="{'is-invalid': submitted && form['libelle'].errors}">
+                                    
+                                </mat-form-field>
+                                <span *ngIf=" errorMessages" style="color: red;">{{ errorMessages }}</span>
+                                <div *ngIf="submitted && form['libelle'].errors" class="invalid-feedback" style="color: red;">
+                                    <span *ngIf="form['libelle'].errors['required']">Libelle est requis.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="tagus-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Date Début</label>
+                                <mat-form-field appearance="fill" class="date-input">
+                                    <mat-label>MM/DD/YYYY</mat-label>
+                                    <input matInput [matDatepicker]="picker2" 
+                                    name="date_debut"
+                                    formControlName="date_debut"
+                                    [ngClass]="{'is-invalid': submitted && form['date_debut'].errors}" >
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                    
+                                </mat-form-field>
+                                <div *ngIf="submitted && form['date_debut'].errors" class="invalid-feedback" style="color: red;">
+                                    <span *ngIf="form['date_debut'].errors['required']">Date de debut est requis.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="tagus-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Date Fin</label>
+                                <mat-form-field appearance="fill" class="date-input">
+                                    <mat-label>MM/DD/YYYY</mat-label>
+                                    <input matInput [matDatepicker]="picker3" 
+                                    name="date_fin_prevue"
+                                    formControlName="date_fin_prevue"
+                                    [ngClass]="{'is-invalid': submitted && form['date_fin_prevue'].errors}">
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker3 ></mat-datepicker>
+                                   
+                                </mat-form-field>
+                                <div *ngIf="submitted && form['date_fin_prevue'].errors" class="invalid-feedback" style="color: red;">
+                                    <span *ngIf="form['date_fin_prevue'].errors['required']">Date de fin prevue est requis.</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="mt-5" style="display: flex; align-items: center;">
+                        <button type="button" mat-flat-button matStepperNext class="tagus" color="primary">Ajouter Référentiel (s)</button>
+                        <button type="submit" mat-flat-button class="tagus" style="margin-left: auto;">Créer Promotion</button>
+                    </div>
+                      
+                      
+                      
+                      
+                </form>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Référentiels</ng-template>
+                <form (ngSubmit)="savePromoWithRef()">
+                    <div class="row">
+                        
+                        
+                        
+                        <div class="col-lg-6 col-md-6">
+                            <div class="modal-body">
+                                <div *ngIf="referentiels && referentiels.length > 0; else noReferentiels">
+                                    <label class="d-block mb-12 fw-semibold gray-color">Selectionner un ou plusieurs référentiel (s)</label>
+                                  <div *ngFor="let referentiel of referentiels">
+                                    <mat-checkbox type="checkbox" [checked]="isSelected(referentiel)" (change)="toggleSelection(referentiel)">
+                                      {{ referentiel.libelle }}
+                                    </mat-checkbox>
+                                  </div>
+                                </div>
+                                <ng-template #noReferentiels>
+                                  <p>Il n'y a pas de référentiel à ajouter.</p>
+                                </ng-template>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    <div class="mt-5">
+                        <button type="button" mat-flat-button matStepperPrevious class="gray me-15">Back</button>
+                        <button  type="submit" mat-flat-button matStepperNext class="tagus">Créer</button>
+                    </div>
+                </form>
+            </mat-step>
+
+
+        </mat-stepper>
+    </mat-card-content>
+</mat-card>

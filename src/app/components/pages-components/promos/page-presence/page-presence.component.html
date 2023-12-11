@@ -1,0 +1,58 @@
+<div class="d-flex align-items-center justify-content-end">
+    <mat-form-field class="mr-3">
+        <mat-label>Choose a date</mat-label>
+        <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="selectedDate"
+            (dateInput)="onDateSelect($event)"
+            name="date"
+            required
+            #date
+        />
+        <mat-hint>YYYY/MM/DD/</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>
+
+<button (click)="exportAllToPDF(container)" class="export-button">Exporter en PDF</button>
+<button (click)="exportToExcel()" class="export-excel">Exporter en Excel</button>
+<button (click)="reloadPage()" class="refresh">Raffraichir la liste</button>
+
+<div class="container mt-4" #container>
+    <div class="row">
+        <div class="col-md-12 ">
+
+            <h2>Liste de présence: {{ MyDate | date:'dd-MM-yyyy'}}</h2>
+            <table class="table">
+                <thead class="table-header">
+                    <tr>
+                        <th scope="col">Matricule</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Heure d'arrivée</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let presence of apprenantsPresentRef">
+                        <tr *ngFor="let apprenant of presence.apprenants">
+                            <td>{{ apprenant.apprenant.matricule }}</td>
+                            <td>{{ apprenant.apprenant.nom }}</td>
+                            <td>{{ apprenant.apprenant.prenom }}</td>
+                            <td
+                                [style.color]="
+                                    isLate(apprenant.created_at!)
+                                        ? 'red'
+                                        : 'black'
+                                "
+                            >
+                                {{ apprenant.created_at!.slice(11, 16) }}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

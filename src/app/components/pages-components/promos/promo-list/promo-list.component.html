@@ -1,0 +1,107 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Promotions</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+
+        <li class="breadcrumb-item fw-semibold">Promos</li>
+        <li class="breadcrumb-item fw-semibold">Liste</li>
+    </ol>
+</div>
+<mat-card class="mb-25 tagus-card" [class.component-dark-theme]="themeService.isDark()">
+
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h5 class="mb-0">Liste Des Promotions  <span class="main-color">  ({{dataSource.data.length}})</span></h5>
+        <div class="d-flex align-items-center">
+            <form class="search-box position-relative me-15 d-none d-md-block">
+                <input  class="input-search d-block" placeholder="Rechercher ici..." matInput (keyup)="applyFilter($event)" #input>
+                <button type="submit"><i class="ri-search-line"></i></button>
+            </form>
+            <div *ngIf="isSuperAdmin">
+            <a mat-flat-button class="default-btn tagus small" routerLink="/pages/promos/create">
+                <i class="ri-add-fill"></i>Nouvelle
+            </a>
+        </div>
+    </div>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="mat-elevation-z8 tagus-mat-table">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <!-- Product Name Column -->
+                <ng-container matColumnDef="libelle">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-start">Libelle</th>
+                    <td mat-cell *matCellDef="let element" class="text-start" >
+                        <div class="d-flex align-items-center">
+                            <a [routerLink]="['detail', element.id]" class="d-flex align-items-center product-info" [ngStyle]="{'color': element.is_ongoing ? 'green' : 'red'}">
+                                <img [src]="imgPromos" alt="product"> {{element.libelle | titlecase}}
+                            </a>
+                        </div>
+                    </td>
+
+                </ng-container>
+
+                <!-- Category Column -->
+                <ng-container matColumnDef="date_debut">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Début</th>
+                    <td mat-cell *matCellDef="let element">{{element.date_debut}}</td>
+
+
+                </ng-container>
+
+                <!-- Price Column -->
+                <ng-container matColumnDef="date_fin_prevue">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Fin</th>
+                    <td mat-cell *matCellDef="let element">{{element.date_fin_prevue}}</td>
+
+                </ng-container>
+
+
+
+                <div *ngIf="isSuperAdmin">
+                <!-- Action Column -->
+                <ng-container matColumnDef="actions">
+                    
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+                    
+                    <td mat-cell *matCellDef="let element">
+                        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="actionMenu">
+                            <i class="{{element.action}}"></i>
+                        </button>
+                        <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
+                            <button mat-menu-item type="button" class="bg-transparent border-none position-relative"  (click)="openModifyDialog('300ms', '100ms',element.id)">
+                                <i class="ri-edit-line"></i> Modifier
+                            </button>
+                            <div *ngIf="element.is_active===true">
+                                <button mat-menu-item type="button" class="bg-transparent border-none position-relative" (click)="openConfirmationDialog('300ms', '100ms',element.id)">
+                            <i class="ri-toggle-line"></i>Désactiver
+                        </button>
+                    </div>
+                        <div *ngIf="element.is_active===false">
+                        <button mat-menu-item type="button" class="bg-transparent border-none position-relative" (click)="openConfirmationActiveDialog('300ms', '100ms',element.id)">
+                            <i class="ri-toggle-fill"></i>Activer
+                        </button>
+                    </div>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+            </div>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumns;" ></tr>
+
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

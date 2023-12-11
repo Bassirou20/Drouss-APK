@@ -1,0 +1,122 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Absences</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+
+        <li class="breadcrumb-item fw-semibold">Absences</li>
+        <li class="breadcrumb-item fw-semibold">Liste</li>
+    </ol>
+</div>
+<div *ngIf="promotion && referentiel">
+    <mat-card class="mb-25 tagus-card" [class.component-dark-theme]="themeService.isDark()">
+
+        <mat-card-header>
+            <h5 class="mb-0 ">Promotion: <span class="main-color">{{promotion.libelle | titlecase}}</span></h5>
+            <div class="d-flex align-items-center">
+
+                <h5 class="mb-0">Référentiel: <span class="main-color">{{referentiel.libelle | titlecase}}</span></h5>
+
+
+            </div>
+        </mat-card-header>
+    </mat-card>
+</div>
+
+<mat-card class="mb-25 tagus-card">
+
+    <mat-card-header>
+        <h5 class="mb-0">Liste Des Absences  <span class="main-color">  ({{dataSource.data.length}})</span></h5>
+
+        <div class="d-flex align-items-center">
+
+            <form class="search-box position-relative me-15 d-none d-md-block">
+                <input  class="input-search d-block" placeholder="Rechercher ici..." matInput (keyup)="applyFilter($event)" #input>
+                <button type="submit" ><i class="ri-search-line"></i></button>
+            </form>
+
+    </div>
+    </mat-card-header>
+
+    <div *ngIf="apprenantAbsent && (!apprenantAbsent || apprenantAbsent.length === 0)">
+        <p>Il n'y a pas encore d'absences pour cette classe.</p>
+    </div>
+
+    <mat-card-content *ngIf="apprenantAbsent &&  apprenantAbsent.length != 0">
+        <button (click)="exportAllToPDF(container)" class="export-button">Exporter en PDF</button>
+        <button (click)="exportToExcel()" class="export-excel">Exporter en Excel</button>
+        <div class="mat-elevation-z8 tagus-mat-table" #container>
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <!-- Product Name Column -->
+                <ng-container matColumnDef="apprenant">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Apprenant</th>
+                    <td mat-cell *matCellDef="let element">{{element.prenom}} {{element.nom}}</td>
+
+
+                </ng-container>
+                <ng-container matColumnDef="date_absence">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date absence</th>
+                    <td mat-cell *matCellDef="let element">{{element.date_absence}}</td>
+
+
+                </ng-container>
+
+                <!-- Category Column -->
+                <ng-container matColumnDef="justifier">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Justifier</th>
+                    <td mat-cell *matCellDef="let element" [ngStyle]="{'color': element.justifier ? 'green' : 'red'}">
+                        <ng-container *ngIf="element.justifier; else notJustified">Justifier</ng-container>
+                        <ng-template #notJustified>Non justifié</ng-template>
+                    </td>
+                </ng-container>
+
+                <!-- Price Column -->
+                <ng-container matColumnDef="motif">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Motif</th>
+                    <td mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.motif; else noMotif">{{ element.motif }}</ng-container>
+                        <ng-template #noMotif>Pas de motif d'absence</ng-template>
+                    </td>
+                </ng-container>
+
+
+
+                <div *ngIf="isSuperAdmin">
+                <!-- Action Column -->
+                <ng-container matColumnDef="actions">
+
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+
+                    <td mat-cell *matCellDef="let element">
+                        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="actionMenu">
+                            <i class="{{element.action}}"></i>
+                        </button>
+                        <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
+                            <button mat-menu-item type="button" class="bg-transparent border-none position-relative" (click)="openModifyDialog('300ms', '100ms',element.id)" >
+                                <i class="ri-edit-line"></i> Justification
+                            </button>
+
+                        </mat-menu>
+                    </td>
+                </ng-container>
+            </div>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumns;" ></tr>
+
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+
+</mat-card>

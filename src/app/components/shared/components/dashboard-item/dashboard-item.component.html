@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" [class.component-rtl-enabled]="themeService.isRTLEnabled()">
+    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" class="col">
+        <mat-card class="single-stats-box tagus-card mb-25">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <i class="flaticon-goal"></i>
+                </div>
+                <div class="title">
+                    
+                    <span class="gray-color d-block">{{libelle}}</span>
+                    <h3>{{nombre}}</h3>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

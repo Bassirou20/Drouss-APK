@@ -1,0 +1,166 @@
+.remove-btn {
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+.course-completion-box {
+    .course-completion-item {
+        padding: 30px 20px 30px 100px;
+        margin-bottom: 15px;
+        #chart {
+            transform: translateY(-50%);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+        }
+        h5 {
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+        span {
+            font-size: 14px;
+        }
+        .link-btn {
+            transform: translateY(-50%);
+            position: absolute;
+            font-size: 20px;
+            right: 20px;
+            top: 50%;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    &.component-rtl-enabled {
+        .course-completion-item {
+            padding-right: 50px;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .course-completion-box {
+        .course-completion-item {
+            padding: 5px 15px 15px;
+            #chart {
+                top: 0;
+                left: 0;
+                padding-left: 75px;
+                position: relative;
+                transform: translateY(0);
+            }
+            h5 {
+                font-size: 14px;
+            }
+            .link-btn {
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .course-completion-box {
+        .course-completion-item {
+            #chart {
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+.current-courses-box {
+    .current-courses-list {
+        margin: {
+            top: -12px;
+            left: -6px;
+            right: -6px;
+        }
+        ;
+        .course-item {
+            flex: 0 0 auto;
+            width: 33.3333333333%;
+            padding: {
+                left: 6px;
+                right: 6px;
+            }
+            ;
+            .box {
+                border: solid 1px orange;
+                padding: 28px;
+                margin-top: 12px;
+                .title {
+                    h3 {
+                        margin-bottom: 7px;
+                        font-size: 20px;
+                    }
+                    span {
+                        font: {
+                            size: 13px;
+                            weight: 600;
+                        }
+                        ;
+                    }
+                }
+                .info {
+                    margin-top: 25px;
+                    span {
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .current-courses-box {
+        .mat-mdc-card-header {
+            padding-bottom: 15px;
+        }
+        .current-courses-list {
+            .course-item {
+                width: 100%;
+                .box {
+                    .title {
+                        h3 {
+                            font-size: 17px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .current-courses-box {
+        .current-courses-list {
+            .course-item {
+                .box {
+                    padding: 25px;
+                    .title {
+                        h3 {
+                            font-size: 24px;
+                        }
+                        span {
+                            font: {
+                                size: 14px;
+                            }
+                            ;
+                        }
+                    }
+                    .info {
+                        span {
+                            font-size: var(--fontSize);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ref {
+    background-color: red;
+}

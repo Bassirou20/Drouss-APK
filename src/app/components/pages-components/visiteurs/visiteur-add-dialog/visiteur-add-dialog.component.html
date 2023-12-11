@@ -1,0 +1,64 @@
+<div *ngIf="userRole === true">
+
+    <div class="create-dialog-box scrollable-dialog">
+        <div class="title d-flex align-items-center justify-content-space-between">
+            <h4 class="mb-0">Nouveau Visiteur</h4>
+            <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+        </div>
+        <form (ngSubmit)="saveVisiteur()" [formGroup]="visiteurForm">
+            <div class="row">
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label class="d-block fw-semibold">Nom</label>
+                        <input type="text" class="input-control" placeholder="Entrer le nom" formControlName="nom"
+                        [ngClass]="{'is-invalid': submitted && form['nom'].errors}" />
+                        <div *ngIf="submitted && form['nom'].errors" class="invalid-feedback" style="color: red;">
+                            <span *ngIf="form['nom'].errors['required']">Nom is required.</span>
+                            <!-- <span *ngIf="form['nom'].errors['minLength']">Nom doit avoir au minimum 5 charactères.</span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label class="d-block fw-semibold">Prénom</label>
+                        <input type="text" class="input-control" placeholder="Entrer le prénom" formControlName="prenom" 
+                        [ngClass]="{'is-invalid': submitted && form['prenom'].errors}" />
+                        <div *ngIf="submitted && form['prenom'].errors" class="invalid-feedback" style="color: red;">
+                            <span *ngIf="form['prenom'].errors['required']">Prenom is required.</span>
+                            <!-- <span *ngIf="form['prenom'].errors['minLength']">Prenom doit avoir au minimum 5 charactères. (debug)</span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label class="d-block fw-semibold">CNI</label>
+                        <input type="INE" class="input-control" placeholder="Entrer l'INE"
+                        formControlName="INE"
+                        [ngClass]="{'is-invalid': submitted && form['INE'].errors}" />
+                        <div *ngIf="submitted && form['INE'].errors" class="invalid-feedback" style="color: red;">
+                            <span *ngIf="form['INE'].errors['required']">CNI is required.</span>
+                            <!-- <span *ngIf="form['INE'].errors['pattern']">INE doit avoir au minimum 17 chiffres</span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label class="d-block fw-semibold">Motif</label>
+                        <input type="text" class="input-control" placeholder="Entrer le motif" formControlName="motif"
+                        [ngClass]="{'is-invalid': submitted && form['motif'].errors}" />
+                        <div *ngIf="submitted && form['motif'].errors" class="invalid-feedback" style="color: red;">
+                            <span *ngIf="form['motif'].errors['required']">Motif is required.</span>
+                            <!-- <span *ngIf="form['motif'].errors['minLength']">Motif doit avoir au minimum 5 charactères.</span> -->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="text-end">
+                <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+                <button type="submit"><i class="ri-add-fill"></i> Créer nouveau visiteur</button>
+            </div>
+        </form>
+    </div>
+</div>

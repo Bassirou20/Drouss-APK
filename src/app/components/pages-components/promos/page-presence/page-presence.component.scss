@@ -1,0 +1,146 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 2rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 1rem;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  .table th {
+    font-weight: 600;
+    background-color: #f7f7f7;
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .table td {
+    position: relative;
+  }
+
+  .table td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+    position: absolute;
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #999;
+    font-size: 0.75rem;
+  }
+
+  .table td:last-child:before {
+    display: none;
+  }
+
+  .table td late {
+    background-color: #f4b0c1;
+  }
+
+  @media (max-width: 576px) {
+    .table thead {
+      display: none;
+    }
+
+    .table tbody tr {
+      display: block;
+      margin-bottom: 1.5rem;
+      border: none;
+    }
+
+    .table tbody td {
+      display: block;
+      text-align: center;
+      border: none;
+      position: relative;
+    }
+
+    .table td:before {
+      top: -1rem;
+      font-size: 0.9rem;
+    }
+  }
+  .date-label {
+    font-weight: bold;
+  }
+
+  .date-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .export-button {
+    background-color: #ef233c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .export-button:hover {
+    background-color: #d90429;
+  }
+
+  .export-excel {
+    background-color: #52b788;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .export-excel:hover {
+    background-color: #40916c;
+  }
+
+  .refresh{
+    background-color: rgb(56, 99, 193);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  .refresh:hover{
+    background-color: rgb(27, 58, 116);
+  }
+
+  .table-header {
+    background-color: gray;
+    color: white; 
+}
+

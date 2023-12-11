@@ -1,0 +1,52 @@
+<div *ngIf="promo ">
+    <div *ngIf="promo.is_active ">
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Désactiver</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form  (ngSubmit)="desactiver()"  >
+        <div class="row">
+            
+          
+            <div class="col-lg-6 col-md-6">
+                <div class="modal-body">
+                    Êtes vous sûres de vouloir désactiver <strong>{{promo.libelle}}</strong> ?
+                </div>
+            </div>
+          
+            
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+            <button type="submit" class="remove-btn"><i class="ri-subtract-fill"></i> Désactiver</button>
+        </div>
+    </form>
+</div>
+</div>
+<div *ngIf="!promo.is_active ">
+    <div class="create-dialog-box scrollable-dialog">
+        <div class="title d-flex align-items-center justify-content-space-between">
+            <h4 class="mb-0">Activer</h4>
+            <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+        </div>
+        <form  (ngSubmit)="desactiver()"  >
+            <div class="row">
+                
+              
+                <div class="col-lg-6 col-md-6">
+                    <div class="modal-body">
+                        Êtes vous sûres de vouloir réactiver <strong>{{promo.libelle}}</strong> ?
+                    </div>
+                </div>
+              
+                
+            </div>
+            <div class="text-end">
+                <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+                <button type="submit" class="remove-btn"><i class="ri-subtract-fill"></i> Activer</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.table th {
+  font-weight: bold;
+  background-color: #f5f5f5;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.table td {
+  position: relative;
+}
+
+.table td:before {
+  content: attr(data-label);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #999;
+  font-size: 0.75rem;
+}
+
+.table td:last-child:before {
+  display: none;
+}
+
+
+.export-button {
+    background-color: #ef233c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+
+  .export-button:hover {
+    background-color: #d90429;
+  }
+
+.table td[late] {
+  background-color: #f4b0c1;
+}

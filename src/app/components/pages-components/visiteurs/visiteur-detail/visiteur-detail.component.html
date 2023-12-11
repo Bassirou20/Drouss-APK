@@ -1,0 +1,138 @@
+<div *ngIf="visiteur ">
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Visiteur</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/">
+                <i class="ri-home-8-line"></i> Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item fw-semibold">Détails Visiteur</li>
+    </ol>
+</div>
+
+
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
+    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="33%" fxFlex.md="100%" class="col">
+
+        <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+            <mat-card-header class="border-bottom">
+                <h5 class="mb-0">Information Personnelle</h5>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
+                        <div class="fw-semibold d-inline-block">Nom Complet:</div>
+                        <div class="gray-color">{{visiteur.prenom}} {{visiteur.nom}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
+                        <div class="fw-semibold d-inline-block">CNI:</div>
+                        <div class="gray-color">{{visiteur.INE}}</div>
+                    </div>
+                    <div class="col-12">
+                        <div class="fw-semibold d-inline-block">Motif:</div>
+                        <div class="gray-color">{{visiteur.motif}}</div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        
+        
+    </div>
+
+    <div *ngIf="userRole === true">
+
+        <mat-card class="mb-25 tagus-card">
+            <mat-card-header>
+                <h5 class="mb-0">Modifier les Infos.</h5>
+                
+
+            </mat-card-header>
+            <mat-card-content>
+                <form  [formGroup]="visiteurForm" (ngSubmit)="modifyVisiteur(visiteur)">
+                    <div class="row" >
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="tagus-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color"> Nom</label>
+                                <mat-form-field appearance="fill">
+                                    <i class="ri-user-3-line"></i>
+                                    <mat-label>Entrer le nom</mat-label>
+                                    <input matInput 
+                                    formControlName="nom"
+                                    name="nom"
+                                    [ngClass]="{'is-invalid': submitted && form['nom'].errors}"
+                                    [value]="visiteur.nom"
+                                >
+                                </mat-form-field>
+                                <div *ngIf="submitted && form['nom'].errors" class="invalid-feedback" style="color: red;">
+                                    <span *ngIf="form['nom'].errors['required']">Nom est requis.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="tagus-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Prénom</label>
+                                <mat-form-field appearance="fill">
+                                    <i class="ri-user-3-line"></i>
+                                    <mat-label>Entrer le Prénom</mat-label>
+                                    <input matInput 
+                                    formControlName="prenom"
+                                    name="prenom"
+                                    [ngClass]="{'is-invalid': submitted && form['prenom'].errors}"
+                                    [value]="visiteur.prenom"
+                                    >
+                                </mat-form-field>
+                                <div *ngIf="submitted && form['prenom'].errors" class="invalid-feedback" style="color: red;">
+                                    <span *ngIf="form['prenom'].errors['required']">Prenom est requis.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="tagus-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">INE <span>*</span></label>
+                                <mat-form-field appearance="fill">
+                                    <i class="ri-mail-line"></i>
+                                    <mat-label>Entrer INE </mat-label>
+                                    <input matInput 
+                                    formControlName="INE"
+                                    name="INE"
+                                    [ngClass]="{'is-invalid': submitted && form['INE'].errors}"
+                                    [value]="visiteur.INE"
+                                >
+                                </mat-form-field>
+                                <div *ngIf="submitted && form['INE'].errors" class="invalid-feedback" style="color: red;">
+                                    <span *ngIf="form['INE'].errors['required']">INE est requis.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="tagus-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Motif</label>
+                                <mat-form-field appearance="fill">
+                                    <i class="ri-phone-line"></i>
+                                    <mat-label>Entrer le Motif</mat-label>
+                                    <input matInput 
+                                    formControlName="motif"
+                                    name="motif"
+                                    [ngClass]="{'is-invalid': submitted && form['motif'].errors}"
+                                    [value]="visiteur.motif"
+                                >
+                                </mat-form-field>
+                                <div *ngIf="submitted && form['motif'].errors" class="invalid-feedback" style="color: red;">
+                                    <span *ngIf="form['motif'].errors['required']">Motif est requis.</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="text-center">
+                        <button mat-flat-button class="tagus fw-semibold d-flex align-items-center">Modifier</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+</div>

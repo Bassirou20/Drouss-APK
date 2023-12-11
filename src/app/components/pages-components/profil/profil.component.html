@@ -1,0 +1,84 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Profile</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/">
+                <i class="ri-home-8-line"></i> Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item fw-semibold">Détails Compte</li>
+    </ol>
+</div>
+
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h5 class="mb-0">Modifier les Infos.</h5>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Nom <span>*</span></label>
+                        <mat-form-field appearance="outline">
+                            <i class="ri-user-line"></i>
+                            <input matInput formControlName="name" name="name">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Prénom <span>*</span></label>
+                        <mat-form-field appearance="outline">
+                            <i class="ri-user-line"></i>
+                            <input matInput formControlName="prenom" name="prenom">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Adresse <span>*</span></label>
+                      <mat-form-field appearance="outline">
+                        <i class="ri-map-pin-line"></i>
+                        <input matInput formControlName="adresse" name="adresse">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                  <div class="col-lg-6">
+                    <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Téléphone <span>*</span></label>
+                      <mat-form-field appearance="outline">
+                        <i class="ri-phone-line"></i>
+                        <input matInput formControlName="telephone" name="telephone">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Email <span>*</span></label>
+                      <mat-form-field appearance="outline">
+                        <i class="ri-mail-line"></i>
+                        <input matInput formControlName="email" name="email">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="tagus-form-group">
+                      <label class="d-block mb-12 fw-semibold gray-color">Mot de passe <span>*</span></label>
+                      <mat-form-field appearance="outline">
+                        <i class="ri-lock-line"></i>
+                        <input matInput formControlName="password" name="password" type="password">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                 
+                  
+            </div>
+            <div class="text-center">
+                <button mat-flat-button color="primary" type="submit" class="mt-25">Enregistrer</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,70 @@
+<div *ngIf="promo ">
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Modification de la promotion</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form (ngSubmit)="modificationPromo(promo.id)" [formGroup]="promoForm">
+        <div class="row">
+            
+                <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Libelle</label>
+                    <input class="input-control" placeholder="Enter Libelle" type="text" name="libelle"
+                        formControlName="libelle"
+                        [value]="promo.libelle"
+                        [ngClass]="{'is-invalid': submitted && form['libelle'].errors}" />
+                        
+                    <div *ngIf="submitted && form['libelle'].errors" class="invalid-feedback"  style="color: red;">
+                        <span *ngIf="form['libelle'].errors['required']">Libelle est requis.</span>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Date debut</label>
+                    <input class="input-control" placeholder="Enter Date_debut" type="date" name="date_debut"
+                        formControlName="date_debut"
+                        [value]="promo.date_debut"
+                        [ngClass]="{'is-invalid': submitted && form['date_debut'].errors}" />
+                    <div *ngIf="submitted && form['date_debut'].errors" class="invalid-feedback"  style="color: red;">
+                        <span *ngIf="form['date_debut'].errors['required']">Date de debut est requis.</span>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Date fin prevue</label>
+                    <input class="input-control" placeholder="Enter Date_fin_prevue" type="date" name="date_fin_prevue"
+                        formControlName="date_fin_prevue"
+                        [value]="promo.date_fin_prevue"
+                        [ngClass]="{'is-invalid': submitted && form['date_fin_prevue'].errors}" />
+                    <div *ngIf="submitted && form['date_fin_prevue'].errors" class="invalid-feedback"  style="color: red;">
+                        <span *ngIf="form['date_fin_prevue'].errors['required']">Date de fin prevue est requis.</span>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Date_fin_reel</label>
+                    <input class="input-control" placeholder="Enter Date_fin_reel" type="date" name="date_fin_reel"
+                        formControlName="date_fin_reel"
+                        [value]="promo.date_fin_reel"
+                        [ngClass]="{'is-invalid': submitted && form['date_fin_reel'].errors}" />
+                    <div *ngIf="submitted && form['date_fin_reel'].errors" class="invalid-feedback"  style="color: red;">
+                      <span *ngIf="form['date_fin_reel'].errors['required']">Date de fin reel est requis.</span>
+                    </div>
+                </div>
+                </div>
+           
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+            <button type="submit"><i class="ri-edit-fill"></i> Modifier Promotion</button>
+        </div>
+    </form>
+</div>
+</div>

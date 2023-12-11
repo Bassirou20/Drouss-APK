@@ -1,0 +1,64 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Utilisateurs</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/">
+                <i class="ri-home-8-line"></i> Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item fw-semibold">Liste</li>
+    </ol>
+</div>
+
+<div fxLayout="row" fxLayoutGap="25px" fxLayout.xs="column" fxLayoutGap.xs="0" fxLayout.sm="column" fxLayoutGap.sm="0">
+    <div fxFlex="37%" fxFlex.xl="25%" fxFlex.xs="100%" fxFlex.sm="100%" class="col">
+        <mat-card class="mb-25 chat-sidebar tagus-card" [class.component-dark-theme]="themeService.isDark()" [class.component-rtl-enabled]="themeService.isRTLEnabled()">
+            <mat-card-header>
+                <h5 class="mb-0">Utilisateurs</h5>
+                <button mat-raised-button class="default-btn tagus small text-center" (click)="showAddForm = !showAddForm">
+                    {{ showAddForm ? 'Annuler' : 'Nouvel' }}
+                </button>
+
+            </mat-card-header>
+            <mat-card-content>
+                <form class="search-box position-relative">
+                    <input type="text" class="input-search d-block" placeholder="Search here..">
+                    <button type="submit"><i class="ri-search-line"></i></button>
+                </form>
+                <ng-scrollbar visibility="hover">
+                    <div class="sidebar-body">
+                        <ul class="user-list" *ngFor="let user of users">
+                            <li (click)="selectUser(user)" class="position-relative d-flex align-items-center justify-content-space-between">
+                              <div class="content d-flex align-items-center">
+                                <div class="img position-relative">
+                                  <img [src]="imgUser" width="45" class="rounded-circle" alt="user">
+                                  <span class="active-status"></span>
+                                </div>
+                                <div class="title ms-10">
+                                  <h5 class="fs-15 mb-4">{{ user.name }} {{user.prenom}}</h5>
+                                  <span class="d-block fs-14">{{ user.role_id.libelle }}</span>
+                                  <span class="d-block" [ngClass]="{'green-color': user.isActive, 'red-color': !user.isActive}">
+                                    {{ user.isActive ? 'Active' : 'Inactive' }}
+                                  </span>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                          
+
+                    </div>
+                </ng-scrollbar>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+    <div fxFlex="63%" fxFlex.xl="75%" fxFlex.xs="100%" fxFlex.sm="100%" class="col" fxLayoutAlign="center center">
+
+        <app-user-form *ngIf="showAddForm"></app-user-form>
+
+        <ng-container *ngIf="showUserInfo">
+            <app-user-info [user]="selectedUser" [showUserInfo]="showUserInfo"></app-user-info>
+        </ng-container>
+    </div>
+
+</div>

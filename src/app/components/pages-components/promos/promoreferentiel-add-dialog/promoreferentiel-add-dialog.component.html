@@ -1,0 +1,30 @@
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Ajouter Référentiel</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form (ngSubmit)="addReferentiels()" >
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-6">
+                <div class="modal-body">
+                    <div *ngIf="referentiels && referentiels.length > 0; else noReferentiels">
+                      <div *ngFor="let referentiel of referentiels">
+                        <mat-checkbox type="checkbox" [checked]="isSelected(referentiel)" (change)="toggleSelection(referentiel)">
+                          {{ referentiel.libelle }}
+                        </mat-checkbox>
+                      </div>
+                    </div>
+                    <ng-template #noReferentiels>
+                      <p>Il n'y a pas de référentiel à ajouter.</p>
+                    </ng-template>
+                </div>
+            </div>
+            
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+            <button type="submit"><i class="ri-add-fill"></i> Ajouter Référentiel</button>
+        </div>
+    </form>
+</div>

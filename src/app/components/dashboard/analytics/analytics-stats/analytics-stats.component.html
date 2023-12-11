@@ -1,0 +1,51 @@
+<div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutGap="25px"
+    fxLayoutGap.xs="0"
+    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
+        <mat-card class="single-stats-box tagus-card mb-25">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <i class="flaticon-donut-chart"></i>
+                </div>
+                <div class="title">
+                    <span class="d-block gray-color">Nombre de Promo</span>
+                    <h3>{{nombrePromo}}</h3>
+                </div>
+            </div>
+            <p class="position-relative up">depuis <span>2016</span></p>
+        </mat-card>
+    </div>
+    <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
+        <mat-card class="single-stats-box tagus-card mb-25">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <i class="flaticon-goal"></i>
+                </div>
+                <div class="title">
+                    <span class="d-block gray-color">Nombres Total Formé</span>
+                    <h3>{{nombreTotalForme}}</h3>
+                </div>
+            </div>
+            <p class="position-relative up"><i class="flaticon-trend"></i> <span>{{pourcentageHomme}}%</span> d' homme</p>
+            <p class="position-relative up"><i class="flaticon-trend"></i> <span>{{pourcentageFemme}}%</span> de femme</p>
+        </mat-card>
+    </div>
+    <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
+        <mat-card class="single-stats-box tagus-card mb-25">
+            <div class="d-flex align-items-center">
+                <div class="icon">
+                    <i class="flaticon-award"></i>
+                </div>
+                <div class="title">
+                    <span class="d-block gray-color">Apprenants de la promotion Actuelle</span>
+                    <h3>{{apprenantsActuel}}</h3>
+                </div>
+            </div>
+            <!-- <p class="position-relative down"><i class="flaticon-trend-1"></i> <span>40%</span> Femmes</p> -->
+        </mat-card>
+    </div>
+</div>

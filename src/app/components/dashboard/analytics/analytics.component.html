@@ -1,0 +1,51 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
+    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="33%" fxFlex.md="100%" class="col">
+        <app-welcome-dashboard></app-welcome-dashboard>
+    </div>
+    <div fxFlex="67%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="67%" fxFlex.md="100%" class="col">
+        <app-analytics-stats [nombrePromo]="nombrePromo" [nombreTotalForme]="nombreTotalForme" [nombreFemme]="nombreFemme"  [pourcentageFemme]="pourcentageFemme" [pourcentageHomme]="pourcentageHomme" [apprenantsActuel]="apprenantsActuel"></app-analytics-stats>
+    </div>
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
+    <div fxFlex="66.666666%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0">
+            <div fxFlex="99,999999%" fxFlex.xs="100%" fxFlex.sm="100%" class="col">
+
+                <app-sales-analytics ></app-sales-analytics>
+            </div>
+
+        </div>
+    </div>
+
+    <div fxFlex="33.333333%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+        <app-terminals [nombAppRef]="nombAppRef"></app-terminals>
+    </div>
+
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
+    <div *ngFor="let promo of promosInactives" fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+        <app-new-vs-returing [pourcentageHomme]="formatPourcentage(promo.nbreGarcon*100/promo.nbreApprenant) || 0"
+         [pourcentageFemme]="formatPourcentage(promo.nbreFille*100/promo.nbreApprenant) || 0"
+         [pourcentagePromo]="pourcentagePromo" [title]="promo.promo.libelle" [nombreFemme]="promo.nbreFille" 
+         [nombreHomme]="promo.nbreGarcon">
+        </app-new-vs-returing>
+    </div>
+    <!-- <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+        <app-analytics-gender></app-analytics-gender>
+    </div>
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+    <!-- <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+        <app-new-vs-returing [pourcentageHomme]="pourcentageHomme"[pourcentageFemme]="pourcentageFemme" [pourcentagePromo]="pourcentagePromo" [title]="title" [nombreFemme]="nombreFemme" [nombreHomme]="nombreHomme"></app-new-vs-returing>
+    </div> -->
+    <div fxFlex="auto" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col" >
+        <app-analytics-gender fxLayout="row"></app-analytics-gender>
+    </div>
+    <!-- <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+        <app-visitors-age></app-visitors-age>
+    </div> -->
+    <!-- <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+        <app-analytics-language></app-analytics-language>
+    </div> -->
+</div>

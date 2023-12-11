@@ -1,0 +1,21 @@
+<div *ngIf="promo ">
+    <div class="welcome-box border-radius bg-white box-shadow mb-25" [class.component-dark-theme]="themeService.isDark()" [class.card-borderd-theme]="themeService.isCardBorder()" [class.card-border-radius]="themeService.isCardBorderRadius()" [class.component-rtl-enabled]="themeService.isRTLEnabled()">
+
+        <div class="bottom">
+            <div class="d-md-flex align-items-end justify-content-space-between">
+                <div class="profile-box position-relative">
+                    <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
+                    <h5 class="">Libelle: <span class=" fw-semibold main-color">{{promo.libelle | titlecase}}</span></h5>
+                    <h5 class="">Date Début: <span class=" main-color">{{promo.date_debut}}</span></h5>
+
+
+                </div>
+
+                <div class="impression-box text-center">
+                    <h5 class="">Date Fin Prévue: <span class=" main-color">{{promo.date_fin_prevue}}</span></h5>
+                    <h5 class="">Date Fin Réelle: <span class=" main-color">{{promo.date_fin_reel}}</span></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

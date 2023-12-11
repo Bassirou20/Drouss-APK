@@ -1,0 +1,20 @@
+<div class="col">
+    <mat-card class="mb-25 tagus-card">
+        <mat-card-header>
+            <h5 class="mb-0">Choisir un Fichier Excel</h5>
+        </mat-card-header>
+        <mat-card-content>
+            <ngx-dropzone (change)="onSelect($event)">
+                <ngx-dropzone-label class="fw-semibold">Drop files here or click to upload.</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+            </ngx-dropzone>
+        </mat-card-content>
+    </mat-card>
+    <div class="text-end mb-30 me-30">
+        <button mat-raised-button style="background-color: rgb(255, 0, 0); color:white" class="small me-5" (click)="close()">Fermer</button>
+        <button mat-raised-button class="default-btn tagus small" (click)="saveApprenantExcel() ;close()">Enregistrer</button>
+    </div>
+
+</div>

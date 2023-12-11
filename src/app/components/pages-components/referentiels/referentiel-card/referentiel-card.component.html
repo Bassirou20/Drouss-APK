@@ -1,0 +1,30 @@
+<mat-card class="mb-25 tagus-card card-box" [ngClass]="{'mat-elevation-z8': referentiel.is_active, 'border-danger': !referentiel.is_active}">
+    <div *ngIf="userRole === true">
+        <mat-card-header class="mb-0">
+            <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="monthMenu">
+                <i class="ri-more-fill"></i>
+            </button>
+            <mat-menu #monthMenu="matMenu" class="dotMenu monthMenu" xPosition="before">
+                <button mat-menu-item type="button" class="bg-transparent border-none position-relative" (click)="editRef(referentiel)">
+                    <i class="ri-edit-line"></i> Modifier
+                </button>
+                
+                <button mat-menu-item type="button" class="bg-transparent border-none position-relative" (click)="deleteRef()">
+                    <i class="ri-delete-bin-line"></i> {{referentiel.is_active ? 'Désactiver' : 'Activer'}}
+                </button>
+                
+            </mat-menu>
+        </mat-card-header>
+    </div>
+    <mat-card-content>
+
+        <div class="pt-50 pb-50 text-center"  (click)="editRef(referentiel)">
+            <img [src]="imgRef" alt="folder">
+            <span class="d-block fw-semibold mt-10">{{referentiel.libelle | titlecase}}</span>
+            <p class="d-block fw-semibold mt-10" [ngClass]="{'text-danger': !referentiel.is_active, 'text-success': referentiel.is_active}">
+                 {{referentiel.is_active ? 'Active' : 'Inactive'}}
+            </p>
+        </div>
+ 
+    </mat-card-content>
+</mat-card>

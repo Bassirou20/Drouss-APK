@@ -1,0 +1,77 @@
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Add New Task</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form (ngSubmit)="saveEntreprise()" [formGroup]="apprenantForm">
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Entreprise</label>
+                    <input type="text" class="input-control" placeholder="Status *" formControlName="entreprise">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Responsable</label>
+                    <input type="text" class="input-control" placeholder="Status *" formControlName="responsable">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Fonction</label>
+                    <input type="text" class="input-control" placeholder="Status *" formControlName="fonction">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Adresse</label>
+                    <input type="text" class="input-control" placeholder="Status *" formControlName="adresse">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Email</label>
+                    <input type="text" class="input-control" placeholder="Status *" formControlName="email">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Téléphone</label>
+                    <input type="text" class="input-control" placeholder="0/10 *" formControlName="telephone">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Date</label>
+                    <input type="date" class="input-control" formControlName="date">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Nombre</label>
+                    <input type="text" class="input-control" placeholder="High/Medium/Low *" formControlName="nbre">
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Commentaire</label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-information-line"></i>
+                        <mat-label>Some comments text...</mat-label>
+                        <textarea matInput rows="6" formControlName="commentaire"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+            <button type="submit"><i class="ri-add-fill"></i> Add New Task</button>
+        </div>
+    </form>
+</div>

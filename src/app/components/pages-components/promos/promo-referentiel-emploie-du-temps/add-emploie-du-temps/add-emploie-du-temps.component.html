@@ -1,0 +1,71 @@
+<div class="create-dialog-box">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">{{actionCours}} Cours  </h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="formEmploieDuTemps" (ngSubmit)="validerCours()">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Libelle cours</label>
+                    <input formControlName="nom_cours"  type="text" class="input-control" placeholder="Titre événement *">
+                    <div class="invalid-feedback" style="color: red;">{{ getFormControlErrorMessage('nom_cours') }}</div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Date</label>
+                    <div class="form-group">
+                        <label class="d-block fw-semibold">Veuillez indiquer la date</label>
+                        <input formControlName="date_cours"  type="date" class="input-control" required>
+                        <div class="invalid-feedback" style="color: red;">{{ getFormControlErrorMessage('date_cours') }}</div>
+                        <div [ngStyle]="{'color':'red'}" *ngIf="formEmploieDuTemps.get('date_cours')?.errors?.['dateAfter']">
+                            La date doit être supérieure ou égale à aujourd'hui
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Heure debut</label>
+                    <input formControlName="heure_debut" type="time" class="input-control">
+                    <div class="invalid-feedback" style="color: red;">{{ getFormControlErrorMessage('heure_debut') }}</div>
+                    <div [ngStyle]="{'color':'red'}" *ngIf="formEmploieDuTemps.get('heure_debut')?.errors?.['heureAfter']">
+                        L'heure de début est compris entre 08:00 et 15:00
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Heure fin</label>
+                    <input formControlName="heure_fin"  type="time" class="input-control">
+                    <div class="invalid-feedback" style="color: red;">{{ getFormControlErrorMessage('heure_fin') }}</div>
+                    <div [ngStyle]="{'color':'red'}" *ngIf="formEmploieDuTemps.get('heure_fin')?.errors?.['heureAfter']">
+                        L'heure de fin est compris entre 09:00 et 16:00
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+            <button *ngIf="actionCours=='Edit'" color="warn" type="button" class="remove-btn" (click)="suppCours()"><i class="ri-close-fill"></i> Supprimer </button>
+            <button type="submit" (click)="submit()" [disabled]="formEmploieDuTemps.invalid"><i class="ri-add-fill"></i> Enregistrer </button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+<style>
+    .remove-btn {
+    background-color: rgb(181, 37, 37);
+    color: white;
+    }
+</style>

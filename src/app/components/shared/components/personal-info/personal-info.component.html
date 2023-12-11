@@ -1,0 +1,106 @@
+<div *ngIf="person ">
+    <div class="profile-card-box border-radius bg-white box-shadow mb-25" [class.component-dark-theme]="themeService.isDark()" [class.card-borderd-theme]="themeService.isCardBorder()" [class.card-border-radius]="themeService.isCardBorderRadius()" [class.component-rtl-enabled]="themeService.isRTLEnabled()">
+        <div class="top border-top-radius position-relative">
+            <img [src]="detailImg" alt="welcome" width="150">
+            <h4 class="main-color">Apprenant Détails !</h4>
+
+        </div>
+        <div class="bottom">
+            <div class="d-md-flex align-items-end justify-content-space-between">
+                <div class="profile-box position-relative">
+                    <img src="{{ person.photo ? 'data:image/png;base64,'+person.photo : imgUser }}" class="rounded-circle" alt="user">
+                    <h5 class="fw-semibold">{{person.prenom}} {{person.nom}} </h5>
+                    <span class="d-block gray-color">Apprenant</span>
+                </div>
+                <div class="impression-box text-center">
+
+                    <span class="d-block">{{promo ? promo.libelle.toUpperCase() : ''}}</span>
+                    <h5 class="mb-0 fw-semibold gray-color">{{ref ? ref.libelle.toUpperCase() : ''}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+        <mat-card-header class="border-bottom">
+            <h5 class="mb-0">Information Personnelle</h5>
+        </mat-card-header>
+        <mat-card-content>
+
+            <ul class="list ps-0 mb-0">
+                <div *ngIf="person.motif">
+                    <li>
+                        <span class="fw-semibold d-inline-block">Motif Désactivation:</span>
+                        <span class="gray-color">{{person.motif}}</span>
+                    </li>
+                </div>
+                <li>
+                    <span class="fw-semibold d-inline-block"> Matricule:</span>
+                    <span class="gray-color">{{person.matricule}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block"> Nom Complet:</span>
+                    <span class="gray-color">{{person.prenom}} {{person.nom}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Téléphone:</span>
+                    <span class="gray-color">{{person.telephone}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Email:</span>
+                    <span class="gray-color">{{person.email}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Date Naiss.:</span>
+                    <span class="gray-color">{{person.date_naissance}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Genre:</span>
+                    <span class="gray-color">{{person.genre}}</span>
+                </li>
+
+            </ul>
+        </mat-card-content>
+    </mat-card>
+
+
+
+    <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+        <mat-card-header class="border-bottom">
+            <h5 class="mb-0">Information Supplémentaire</h5>
+        </mat-card-header>
+        <mat-card-content>
+
+            <ul class="list ps-0 mb-0">
+                <li>
+                    <span class="fw-semibold d-inline-block" *matCellDef="let person"> Matricule:</span>
+                    <span class="gray-color">{{person.matricule}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block" *matCellDef="let person"> Nom Complet:</span>
+                    <span class="gray-color">{{person.prenom}} {{person.nom}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Téléphone:</span>
+                    <span class="gray-color">{{person.telephone}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Email:</span>
+                    <span class="gray-color">{{person.email}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Date Naiss.:</span>
+                    <span class="gray-color">{{person.date_naissance}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Genre:</span>
+                    <span class="gray-color">{{person.genre}}</span>
+                </li>
+                <li>
+                    <span class="fw-semibold d-inline-block">Experience:</span>
+                    <span class="gray-color">5 Years</span>
+                </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+</div>

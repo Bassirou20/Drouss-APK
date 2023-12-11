@@ -1,0 +1,103 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Visiteurs</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+
+        <li class="breadcrumb-item fw-semibold">Visiteurs</li>
+        <li class="breadcrumb-item fw-semibold"> Liste</li>
+    </ol>
+</div> 
+
+
+<mat-card class="mb-25 tagus-card" [class.component-dark-theme]="themeService.isDark()">
+
+    <mat-card-header>
+
+
+        <h5 class="mb-0">Liste Des Visiteurs <span class="main-color">  ({{dataSource.data.length}})</span></h5>
+            <div class="d-flex align-items-center">
+                <div *ngIf="userRole === true">
+
+                    <a mat-flat-button class="default-btn tagus small" (click)="openCreateVisiteurDialog('300ms', '100ms')" >
+                        <i class="ri-add-fill"></i>Nouveau
+                    </a>
+                
+
+                </div>
+            </div>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="tagus-form-group">
+            <mat-form-field appearance="fill">
+                <i class="ri-search-line"></i>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
+        <div class="mat-elevation-z8 tagus-mat-table">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+               
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+
+
+               
+
+                
+                <ng-container matColumnDef="nom">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+                    <td mat-cell *matCellDef="let element">{{element.nom}}</td>
+                </ng-container>
+
+               
+                <ng-container matColumnDef="prenom">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Prénom</th>
+                    <td mat-cell *matCellDef="let element">{{element.prenom}}</td>
+                </ng-container>
+
+                
+                <ng-container matColumnDef="INE">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>CNI</th>
+                    <td mat-cell *matCellDef="let element">{{element.INE}}</td>
+                </ng-container>
+
+                
+                <ng-container matColumnDef="motif">
+                    <th mat-header-cell *matHeaderCellDef>Motif</th>
+                    <td mat-cell *matCellDef="let element">{{element.motif}}</td>
+                </ng-container>
+
+               
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="actionMenu">
+            <i class="{{element.action}}"></i>
+        </button>
+                        <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
+                            <button mat-menu-item type="button" class="bg-transparent border-none position-relative" [routerLink]="[element.id]">
+                <i class="ri-information-line"></i> Détails
+            </button>
+                            
+                           
+
+                        </mat-menu>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons ></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

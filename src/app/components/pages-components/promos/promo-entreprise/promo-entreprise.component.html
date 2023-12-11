@@ -1,0 +1,121 @@
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h5 class="mb-0">Liste des entreprises</h5>
+        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="monthMenu">
+            <i class="ri-more-fill"></i>
+        </button>
+        <mat-menu #monthMenu="matMenu" class="dotMenu monthMenu" xPosition="before">
+            <button mat-menu-item type="button" (click)="openAddRefDialog('200ms', '100ms')" class="bg-transparent border-none position-relative">
+                <i class="ri-add-circle-line"></i> Add
+            </button>
+
+            <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                <i class="ri-restart-line"></i> Refresh
+            </button>
+        </mat-menu>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <mat-checkbox>
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+
+                <!-- Product Name Column -->
+                <ng-container matColumnDef="entreprise">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-start">Entreprise</th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        <div class="d-flex align-items-center">
+                            <a [routerLink]="['detail', element.id]" class="d-flex align-items-center product-info" [ngStyle]="{'color': element.is_active ? 'green' : 'red'}">
+                                <img> {{element.entreprise | titlecase}}
+                            </a>
+                        </div>
+                    </td>
+
+                </ng-container>
+
+                <!-- Product Name Column -->
+                <ng-container matColumnDef="responsable">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-start">Responsable</th>
+                    <td mat-cell *matCellDef="let element" class="text-start">
+                        <div class="d-flex align-items-center">
+                            <a [routerLink]="['detail', element.id]" class="d-flex align-items-center product-info" [ngStyle]="{'color': element.is_active ? 'green' : 'red'}">
+                                <img> {{element.responsable | titlecase}}
+                            </a>
+                        </div>
+                    </td>
+
+                </ng-container>
+
+                <!-- Category Column -->
+
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                    <td mat-cell *matCellDef="let element">{{element.email}}</td>
+
+                </ng-container>
+
+
+                <ng-container matColumnDef="telephone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Téléphone</th>
+                    <td mat-cell *matCellDef="let element">{{element.telephone}}</td>
+
+
+                </ng-container>
+
+                <!-- Price Column -->
+                <ng-container matColumnDef="nbre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                    <td mat-cell *matCellDef="let element">{{element.nbre}}</td>
+
+                </ng-container>
+
+
+
+                <div *ngIf="isSuperAdmin">
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="actions">
+
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+
+                        <td mat-cell *matCellDef="let element">
+                            <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="actionMenu">
+                            <i class="{{element.action}}"></i>
+                        </button>
+                            <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
+                                <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                                <i class="ri-edit-line"></i> Modifier
+                            </button>
+                                <div *ngIf="element.is_active===true">
+                                    <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                            <i class="ri-toggle-line"></i>Désactiver
+                        </button>
+                                </div>
+                                <div *ngIf="element.is_active===false">
+                                    <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                            <i class="ri-toggle-fill"></i>Activer
+                        </button>
+                                </div>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+                </div>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

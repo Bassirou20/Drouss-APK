@@ -1,0 +1,113 @@
+<div class="create-dialog-box scrollable-dialog">
+    <div class="title d-flex align-items-center justify-content-space-between">
+        <h4 class="mb-0">Nouvel Apprenant</h4>
+        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form (ngSubmit)="saveApprenant()" [formGroup]="apprenantForm">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 logo">
+                <label class="d-flex align-items-center fw-semibold" for="avatar">
+                    <img [src]="imageShow" class="rounded-circle me-20" width="95" alt="user">
+                </label>
+                <input type="file" accept="image/*" (change)="onFileChange($event)" class="input-control" hidden id="avatar">
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Nom</label>
+                    <input type="text" class="input-control" placeholder="Entrer le nom" formControlName="nom" [ngClass]="{'is-invalid': submitted && form['nom'].errors}" />
+                    <div *ngIf="submitted && form['nom'].errors" style="color: red;">
+                        <div *ngIf="form['nom'].errors['required']">Le nom est obligatoire.</div>
+                        <div *ngIf="form['nom'].errors['maxlength']">Le nom doit contenir au maximum 255 caractères.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Prénom</label>
+                    <input type="text" class="input-control" placeholder="Entrer le prénom" formControlName="prenom" [ngClass]="{'is-invalid': submitted && form['prenom'].errors}" />
+                    <div *ngIf="submitted && form['prenom'].errors" style="color: red;">
+                        <span *ngIf="form['prenom'].errors['required']">Le prenom est obligatoire.</span>
+                        <span *ngIf="form['prenom'].errors['maxlength']">Le prenom doit contenir au maximum 255 caractères.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Email</label>
+                    <input type="email" class="input-control" placeholder="Entrer l'email" formControlName="email" [ngClass]="{'is-invalid': submitted && form['email'].errors}" />
+                    <div *ngIf="submitted && form['email'].errors" style="color: red;">
+                        <span *ngIf="form['email'].errors['required']">L' email est obligatoire.</span>
+                        <span *ngIf="form['email'].errors['maxlength']">L' email doit contenir au maximum 255 caractères.</span>
+                        <span *ngIf="form['email'].errors['email']">L' email doit etre une addresse valide ex(@gmail).</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Téléphone</label>
+                    <input type="text" class="input-control" placeholder="Entrer le téléphone" formControlName="telephone" [ngClass]="{'is-invalid': submitted && form['telephone'].errors}" />
+                    <div *ngIf="submitted && form['telephone'].errors" style="color: red;">
+                        <span *ngIf="form['telephone'].errors['maxlength']">Le numéro de téléphone doit contenir au maximum 255 caractères.</span>
+                        <span *ngIf="form['telephone'].errors['required']">Le numéro telephone est obligatoire.</span>
+                        <span *ngIf="form['telephone'].errors['pattern']">Le numéro de téléphone doit contenir uniquement des chiffres, des espaces et les caractères +, -, (, ).</span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-4">
+                <div class="tagus-form-group without-icon">
+                    <label class="d-block mb-12 fw-semibold gray-color">Sexe</label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choisir le sexe</mat-label>
+                        <mat-select name="genre" formControlName="genre" [ngClass]="{'is-invalid': submitted && form['genre'].errors}">
+                            <mat-option value="Masculin">Masculin</mat-option>
+                            <mat-option value="Feminin">Feminin</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="submitted && form['genre'].errors" class="invalid-feedback" style="color: red;">
+                        <span *ngIf="form['genre'].errors['required']">Sexe est requis.</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Date Naissance</label>
+                    <mat-form-field appearance="fill" class="date-input">
+                        <mat-label>MM/DD/YYYY</mat-label>
+                        <input matInput [matDatepicker]="picker" name="date_naissance" formControlName="date_naissance" [ngClass]="{'is-invalid': submitted && form['date_naissance'].errors}">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+
+                    </mat-form-field>
+                    <div *ngIf="submitted && form['date_naissance'].errors" class="invalid-feedback" style="color: red;">
+                        <span *ngIf="form['date_naissance'].errors['required']">Date Naissance est requis.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Lieu Naissance.</label>
+                    <input type="text" class="input-control" placeholder="Entrer le lieu de naissance" formControlName="lieu_naissance" />
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">N° CNI</label>
+                    <input type="text" class="input-control" placeholder="Entrer le numéro de la carte d'identité" formControlName="cni" [ngClass]="{'is-invalid': submitted && form['cni'].errors}" />
+                    <div *ngIf="submitted && form['cni'].errors" class="invalid-feedback" style="color: red;">
+                        <span *ngIf="form['cni'].errors['required']">Cni est requis.</span>
+                        <span *ngIf="form['cni'].errors['pattern']">Le Cni doit contenir uniquement des chiffres.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-end">
+            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+            <button type="submit"><i class="ri-add-fill"></i> Créer nouvel apprenant</button>
+        </div>
+    </form>
+</div>
